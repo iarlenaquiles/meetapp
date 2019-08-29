@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { isBefore, parseISO } from 'date-fns';
+import { isBefore, parseISO, startOfHour } from 'date-fns';
 import Meetup from '../models/Meetup';
 
 class MeetupController {
@@ -22,6 +22,20 @@ class MeetupController {
 
     if (isBefore(parseISO(date), new Date())) {
       return res.status(400).json({ error: 'Meetup date is invalid' });
+    }
+
+    const hourStart = startOfHour(parseISO(date));
+
+    const checkTimeAvailability = await Meetup.findOne({
+      where: {
+        date: hourStart,
+      },
+    });
+
+    if (checkTimeAvailability) {
+      return res
+        .status(401)
+        .json({ error: 'Meetup date/hour is not availabe' });
     }
 
     const user_id = req.userId;
