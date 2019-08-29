@@ -1,9 +1,31 @@
 import * as Yup from 'yup';
 import { isBefore, parseISO, startOfHour } from 'date-fns';
 import Meetup from '../models/Meetup';
+import User from '../models/User';
+import File from '../models/File';
 
 class MeetupController {
-  async index(req, res) {}
+  async index(req, res) {
+    const user_id = req.userId;
+
+    const meetups = await Meetup.findAll({
+      where: {
+        user_id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: File,
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(meetups);
+  }
 
   async store(req, res) {
     const schema = Yup.object().shape({
