@@ -7,7 +7,9 @@
     "dev": "nodemon src/server.js"
   },
   "dependencies": {
+    "@sentry/node": "^5.4.0",
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.2.2",
     "crypto": "^1.0.1",
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
@@ -16,7 +18,13 @@
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.16.0",
-    "yup": "^0.27.0"
+    "yup": "^0.27.0",
+    "dotenv": "^8.0.0",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^3.1.0",
+    "nodemailer": "^6.2.1",
+    "nodemailer-express-handlebars": "^3.0.0",
+    "youch": "^2.0.10"
   },
   "devDependencies": {
     "eslint": "^6.2.1",
