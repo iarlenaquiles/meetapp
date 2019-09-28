@@ -1,6 +1,12 @@
 import { Op } from 'sequelize';
 import * as Yup from 'yup';
-import { isBefore, parseISO, startOfDay, endOfDay, startOfHour } from 'date-fns';
+import {
+  isBefore,
+  parseISO,
+  startOfDay,
+  endOfDay,
+  startOfHour,
+} from 'date-fns';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
 import File from '../models/File';
